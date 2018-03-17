@@ -1,18 +1,22 @@
 // import { config } from "./Config";
 
-var game = new Phaser.Game(config());
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { create: main.create, main.update: main.update, render: main.render });
 
-function preload()
-{
+var main = {
+    preload: function()
+    {
 
-}
+    },
 
-function create()
-{
-    this.add.text(10, 10, "texti");
-}
+    create: function() {
+        gameMain.create();
+    },
 
-function update()
-{
+    update: function() {
+        gameMain.update();
+    },
 
+    render: function() {
+        game.debug.box2dWorld();
+    }
 }
