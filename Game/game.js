@@ -1,63 +1,34 @@
 ﻿
-var gameMain = {
+var GameMain = {
     create: function () {
 
         game.world.setBounds(-10000, -10000, 20000, 20000);
 
         game.stage.backgroundColor = '#124184';
 
-        // Enable Box2D physics
         game.physics.startSystem(Phaser.Physics.BOX2D);
         game.physics.box2d.gravity.y = 500;
         game.physics.box2d.friction = 0.8;
 
-        // Make the ground body
-        var groundBody = new Phaser.Physics.Box2D.Body(game, null, 0, 0, 0);
-        groundBody.setChain(this.groundVertices);
+        this.groundBody = new Phaser.Physics.Box2D.Body(game, null, 0, 0, 0);
+        this.groundBody.setChain(this.groundVertices);
 
-        var PTM = 50;
-
-        // Make the truck body
-        this.truckBody = new Phaser.Physics.Box2D.Body(game, null, 0, -1 * PTM);
-        this.truckBody.setPolygon(this.truckVertices);
-
-        // Make the wheel bodies
-        var wheelBodies = [];
-        wheelBodies[0] = new Phaser.Physics.Box2D.Body(game, null, -0.82 * PTM, 0.6 * -PTM);
-        wheelBodies[1] = new Phaser.Physics.Box2D.Body(game, null, 1.05 * PTM, 0.6 * -PTM);
-        wheelBodies[0].setCircle(0.3 * PTM);
-        wheelBodies[1].setCircle(0.3 * PTM);
-
-        var frequency = 3.5;
-        var damping = 0.5;
-        var motorTorque = 2;
-        var rideHeight = 0.5;
-
-        // Make wheel joints
-        // bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled	
-        this.driveJoints[0] = game.physics.box2d.wheelJoint(this.truckBody, wheelBodies[0], -0.82 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true); // rear
-        this.driveJoints[1] = game.physics.box2d.wheelJoint(this.truckBody, wheelBodies[1], 1.05 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true); // front
+        this.car = new Truck();
 
         this.cursors = game.input.keyboard.createCursorKeys();
 
-        game.camera.follow(this.truckBody);
-
-        var caption = game.add.text(5, 5, 'Simple car control. Left/right arrow keys to move, down arrow key to brake.', { fill: '#ffffff', font: '14pt Arial' });
-        caption.fixedToCamera = true;
+        game.camera.follow(this.car.body);
     },
     update: function () {
-        var motorSpeed = 50; // rad/s
-        var motorEnabled = true;
-	
-        if(this.cursors.down.isDown) { motorSpeed = 0; } // prioritize braking
-        else if (this.cursors.left.isDown && !this.cursors.right.isDown) { motorSpeed *= -1; }
-        else if (this.cursors.right.isDown && !this.cursors.left.isDown) { }
-        else { motorEnabled = false; } // roll if no keys pressed
-	
-        for (var i = 0; i< 2; i++) {
-            this.driveJoints[i].EnableMotor(motorEnabled);
-            this.driveJoints[i].SetMotorSpeed(motorSpeed);
-	    }
+        if (this.cursors.down.isDown) { this.car.brake(); } // 
+        else if (this.cursors.left.isDown && !this.cursors.right.isDown) { this.car.driveBackwards(); }
+        else if (this.cursors.right.isDown && !this.cursors.left.isDown) { this.car.driveForward(); }
+        else { this.car.disableMotor(); } // roll if no keys pressed
+    },
+
+    destroy: function () {
+        this.car.destroy();
+        this.groundBody.destroy();
     },
 
 
@@ -87,13 +58,5 @@ var gameMain = {
     4167.77, -36.1386, 4262.75, -9.0016, 4372.57, 29.6882, 4504.22, 43.4773, 4649.69, 49.6867,
     4674.48, 29.5702, 4713.99, 14.847, 4760.58, 14.6627, 4803.11, 38.8688, 4819.84, 15.0291,
     4858.19, -1.45256, 4896.91, 5.9419, 4925.06, 31.9846, 4960.49, 17.0905, 5006.14, 15.8518,
-    5050.86, 24.3401, 5078.48, 41.8191, 5498.61, 41.7032, 5499.5, -306.024],
-
-    truckVertices: [-0.941074, -7.13798, -69.9798, -7.91197, -73.1929, 8.39935, -68.3795, 12.8165, -57.3861, 13.1711,
-    -48.8751, 3.47799, -35.3993, 2.53232, -23.1057, 14.7078, 34.2254, 15.6535, 45.2188, 3.8326,
-        59.8766, 3.8326, 67.2056, 10.2159, 71.7627, 9.80711, 72.9977, 1.35024, 69.3556, -5.51562,
-        34.5293, -7.36343, 21.802, -21.4563, 1.15879, -21.9506],
-
-    truckBody: null,
-    driveJoints: []
+    5050.86, 24.3401, 5078.48, 41.8191, 5498.61, 41.7032, 5499.5, -306.024]
 }
