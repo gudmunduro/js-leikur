@@ -3,13 +3,18 @@
 var main = {
 
     currentMode: 0,
+    currentGame: null,
 
     preload: function()
     {
         game.load.image('ground', '/Game/Assets/img/ground.jpg');
         game.load.image('car', '/Game/Assets/Img/Cars/spr_vintage.png');
+
+        // Buttons
         game.load.image('playbutton', '/Game/Assets/Img/Buttons/playButton.png');
         game.load.image('playbutton.hover', '/Game/Assets/Img/Buttons/playButton.hover.png');
+        game.load.image('arrow.right', '/Game/Assets/Img/Buttons/Arrows/right.gif');
+        game.load.image('arrow.left', '/Game/Assets/Img/Buttons/Arrows/left.gif');
     },
 
     create: function () {
@@ -26,6 +31,10 @@ var main = {
         }
     },
 
+    render: function () {
+        if (main.currentMode == 1) game.debug.box2dWorld();
+    },
+
     setMode: function (mode) {
         switch (main.currentMode) {
             case 0: Menu.destroy(); break;
@@ -39,8 +48,10 @@ var main = {
         main.currentMode = mode;
     },
 
-    render: function () {
-        if (main.currentMode == 1) game.debug.box2dWorld();
+    startGame: function(car, map) {
+        GameMain.Car = car;
+        GameMain.Map = map;
+        main.setMode(1);
     }
 }
 
