@@ -7,14 +7,19 @@ var main = {
 
     preload: function()
     {
-        game.load.image('ground', '/Game/Assets/img/ground.jpg');
-        game.load.image('car', '/Game/Assets/Img/Cars/spr_vintage.png');
+        game.load.image('ground', 'Game/Assets/img/ground.jpg');
+
+        // Cars
+        game.load.image('sprcar.body', 'Game/Assets/Img/Cars/spr_vintage/body.png');
+        game.load.image('sprcar.wheel', 'Game/Assets/Img/Cars/spr_vintage/wheel.png');
+        game.load.image('truck.body', 'Game/Assets/Img/Cars/truck/body.png');
+        game.load.image('truck.wheel', 'Game/Assets/Img/Cars/truck/wheel.png');
 
         // Buttons
-        game.load.image('playbutton', '/Game/Assets/Img/Buttons/playButton.png');
-        game.load.image('playbutton.hover', '/Game/Assets/Img/Buttons/playButton.hover.png');
-        game.load.image('arrow.right', '/Game/Assets/Img/Buttons/Arrows/right.gif');
-        game.load.image('arrow.left', '/Game/Assets/Img/Buttons/Arrows/left.gif');
+        game.load.image('playbutton', 'Game/Assets/Img/Buttons/playButton.png');
+        game.load.image('playbutton.hover', 'Game/Assets/Img/Buttons/playButton.hover.png');
+        game.load.image('arrow.right', 'Game/Assets/Img/Buttons/Arrows/right.gif');
+        game.load.image('arrow.left', 'Game/Assets/Img/Buttons/Arrows/left.gif');
     },
 
     create: function () {

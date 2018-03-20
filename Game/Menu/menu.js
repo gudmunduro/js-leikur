@@ -188,7 +188,7 @@ var Menu = {
 
         cars: [
             "Truck",
-            "Don't select this"
+            "Sports car"
         ],
 
         selectedCar: 0,
@@ -208,6 +208,7 @@ var Menu = {
         getCarClass: function (str) {
             switch (str) {
                 case "Truck": return Truck;
+                case "Sports car": return SportsCar;
                 default: console.log("Error: Car not found"); return null;
             }
         }
