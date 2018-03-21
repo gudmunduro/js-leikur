@@ -10,7 +10,7 @@ var GameMain = {
 
         this.map = new this.Map();
 
-        this.car = new this.Car();
+        this.car = new this.Car(this.map.spawnLocation());
 
         this.cursors = game.input.keyboard.createCursorKeys();
 

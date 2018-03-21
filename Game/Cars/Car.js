@@ -1,8 +1,9 @@
 ﻿
 class Car {
 
-    constructor() {
-        this.sprite = game.add.sprite(0, -1 * this.PTM(), this.sprite());
+    constructor(spawnLocation = 0) {
+        this.spawnLocation = spawnLocation;
+        this.sprite = game.add.sprite(this.spawnLocation, -1 * this.PTM(), this.sprite());
         game.physics.box2d.enable(this.sprite, false);
         this.body = this.sprite.body;
 
@@ -18,8 +19,8 @@ class Car {
         let fWheel = this.wheelsPosition().front;
         let bWheel = this.wheelsPosition().back;
 
-        this.wheelSprites[0] = game.add.sprite(bWheel.x * this.PTM(), bWheel.y * -this.PTM(), this.wheelSprite());
-        this.wheelSprites[1] = game.add.sprite(fWheel.x * this.PTM(), fWheel.y * -this.PTM(), this.wheelSprite());
+        this.wheelSprites[0] = game.add.sprite(bWheel.x * this.PTM() + this.spawnLocation, bWheel.y * -this.PTM(), this.wheelSprite());
+        this.wheelSprites[1] = game.add.sprite(fWheel.x * this.PTM() + this.spawnLocation, fWheel.y * -this.PTM(), this.wheelSprite());
         game.physics.box2d.enable(this.wheelSprites[0], false);
         game.physics.box2d.enable(this.wheelSprites[1], false);
 

@@ -27,6 +27,10 @@ class Map {
         return '#124184';
     }
 
+    spawnLocation() {
+        return 0;
+    }
+
     groundVertices() {
         return [];
     }
