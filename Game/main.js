@@ -7,7 +7,7 @@ var main = {
 
     preload: function()
     {
-        game.load.image('ground', 'Game/Assets/img/ground.jpg');
+        game.load.image('testMap', 'Game/Assets/img/ground.png');
 
         // Cars
         game.load.image('sprcar.body', 'Game/Assets/Img/Cars/spr_vintage/body.png');
@@ -37,7 +37,7 @@ var main = {
     },
 
     render: function () {
-        if (main.currentMode == 1) game.debug.box2dWorld();
+        // if (main.currentMode == 1) game.debug.box2dWorld();
     },
 
     setMode: function (mode) {

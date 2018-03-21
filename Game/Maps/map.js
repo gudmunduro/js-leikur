@@ -3,7 +3,13 @@
 class Map {
 
     constructor() {
-        this.body = new Phaser.Physics.Box2D.Body(game, null, 0, 0, 0);
+        game.stage.backgroundColor = this.color();
+
+        this.sprite = game.add.sprite(0, 300, this.sprite());
+        game.physics.box2d.enable(this.sprite, true);
+        this.body = this.sprite.body;
+
+        this.body.static = true;
         this.body.setChain(this.groundVertices());
     }
 
@@ -12,6 +18,14 @@ class Map {
     }
 
     //
+
+    sprite() {
+        return '';
+    }
+
+    color() {
+        return '#124184';
+    }
 
     groundVertices() {
         return [];
