@@ -7,7 +7,7 @@ var main = {
 
     preload: function()
     {
-        game.load.image('testMap', 'Game/Assets/img/ground.png');
+        game.load.image('testMap', 'Game/Assets/Img/ground.png');
 
         // Cars
         game.load.image('sprcar.body', 'Game/Assets/Img/Cars/spr_vintage/body.png');
