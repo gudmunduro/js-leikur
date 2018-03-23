@@ -34,4 +34,10 @@ class Map {
     groundVertices() {
         return [];
     }
+
+    starLocations() {
+        return [];
+    }
+
+
 }

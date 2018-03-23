@@ -188,7 +188,8 @@ var Menu = {
 
         cars: [
             "Truck",
-            "Sports car"
+            "Sports car",
+            "Box dude car"
         ],
 
         selectedCar: 0,
@@ -209,6 +210,7 @@ var Menu = {
             switch (str) {
                 case "Truck": return Truck;
                 case "Sports car": return SportsCar;
+                case "Box dude car": return BoxDudeCar;
                 default: console.log("Error: Car not found"); return null;
             }
         }

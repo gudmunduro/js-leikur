@@ -15,7 +15,14 @@ class Map2 extends Map {
     }
 
     color() {
-        return "#f7844f"
+        return "#f7844f";
+    }
+
+    starLocations() {
+        return [
+            {x: 0, y: 0},
+            {x: -100, y: 10}
+        ];
     }
 
 }

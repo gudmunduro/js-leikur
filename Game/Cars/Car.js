@@ -26,8 +26,10 @@ class Car {
 
         this.wheelBodies[0] = this.wheelSprites[0].body;
         this.wheelBodies[1] = this.wheelSprites[1].body;
-        this.wheelBodies[0].setCircle(0.3 * this.PTM());
-        this.wheelBodies[1].setCircle(0.3 * this.PTM());
+        this.wheelBodies[0].setCircle(0.3 * this.wheelsScale() * this.PTM());
+        this.wheelBodies[1].setCircle(0.3 * this.wheelsScale() * this.PTM());
+        this.wheelSprites[0].scale.set(this.wheelsScale());
+        this.wheelSprites[1].scale.set(this.wheelsScale());
 
         this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], bWheel.x * this.PTM(), this.rideHeight() * this.PTM(), 0, 0, 0, 1, this.wheelFrequency(), this.damping(), 0, this.motorTorque(), true); // rear
         this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1], fWheel.x * this.PTM(), this.rideHeight() * this.PTM(), 0, 0, 0, 1, this.wheelFrequency(), this.damping(), 0, this.motorTorque(), true); // front
@@ -119,6 +121,10 @@ class Car {
             back: { x: -0.82, y: 0.6 },
             front: { x: 1.05, y: 0.6 }
         }
+    }
+
+    wheelsScale() {
+        return 1;
     }
 
     set polygon(value){

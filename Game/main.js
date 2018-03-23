@@ -4,6 +4,7 @@ var main = {
 
     currentMode: 0,
     currentGame: null,
+    debug: false,
 
     preload: function()
     {
@@ -14,6 +15,8 @@ var main = {
         game.load.image('sprcar.wheel', 'Game/Assets/Img/Cars/spr_vintage/wheel.png');
         game.load.image('truck.body', 'Game/Assets/Img/Cars/truck/body.png');
         game.load.image('truck.wheel', 'Game/Assets/Img/Cars/truck/wheel.png');
+        game.load.image('boxDude.body', 'Game/Assets/Img/Cars/box_dude_car/body.png');
+        game.load.image('boxDude.wheel', 'Game/Assets/Img/Cars/box_dude_car/wheel.png');
 
         // Buttons
         game.load.image('playbutton', 'Game/Assets/Img/Buttons/playButton.png');
@@ -37,7 +40,7 @@ var main = {
     },
 
     render: function () {
-        // if (main.currentMode == 1) game.debug.box2dWorld();
+        if (main.debug && main.currentMode == 1) game.debug.box2dWorld();
     },
 
     setMode: function (mode) {
