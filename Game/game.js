@@ -12,6 +12,9 @@ var GameMain = {
 
         this.car = new this.Car(this.map.spawnLocation());
 
+        this.map.createStars(this.car);
+        this.map.collectStar.add(this.collectStar);
+
         this.cursors = game.input.keyboard.createCursorKeys();
 
         game.camera.follow(this.car.body);
@@ -26,5 +29,21 @@ var GameMain = {
     destroy: function () {
         this.car.destroy();
         this.map.destroy();
-    }
+    },
+
+    //
+
+    collectStar: function (car, star) {
+        if (star.sprite == null || star == null)
+        {
+            return;
+        }
+        GameMain.stars++;
+        star.sprite.destroy();
+        star.destroy();
+    },
+
+
+    // Variables
+    stars: 0
 }

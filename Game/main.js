@@ -23,6 +23,9 @@ var main = {
         game.load.image('playbutton.hover', 'Game/Assets/Img/Buttons/playButton.hover.png');
         game.load.image('arrow.right', 'Game/Assets/Img/Buttons/Arrows/right.gif');
         game.load.image('arrow.left', 'Game/Assets/Img/Buttons/Arrows/left.gif');
+
+        // Pickups
+        game.load.image('star', 'Game/Assets/Img/star.png');
     },
 
     create: function () {
