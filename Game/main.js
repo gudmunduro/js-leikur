@@ -6,8 +6,7 @@ var main = {
     currentGame: null,
     debug: false,
 
-    preload: function()
-    {
+    preload: function () {
         game.load.image('testMap', 'Game/Assets/Img/ground.paint.png');
 
         // Cars
@@ -59,7 +58,7 @@ var main = {
         main.currentMode = mode;
     },
 
-    startGame: function(car, map) {
+    startGame: function (car, map) {
         GameMain.Car = car;
         GameMain.Map = map;
         main.setMode(1);

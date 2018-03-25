@@ -44,6 +44,8 @@ class Map {
 
     destroy() {
         this.body.destroy();
+        this.sprite.destroy();
+        this.stars.destroy();
     }
 
     //
@@ -58,6 +60,10 @@ class Map {
 
     spawnLocation() {
         return 0;
+    }
+
+    endLocation(){
+        return { x: 0.00, y: 0.00 };
     }
 
     groundVertices() {

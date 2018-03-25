@@ -1,7 +1,9 @@
 ﻿
 var Menu = {
     create: function () {
+        game.world.setBounds(0, 0, 800, 600);
         game.stage.backgroundColor = '#124184';
+        
         this.buttons.playButton.create();
         this.buttons.carLeftButton.create();
         this.buttons.carRightButton.create();
@@ -10,6 +12,9 @@ var Menu = {
 
         this.texts.carText = game.add.text(game.world.centerX - 30, 220, "Truck");
         this.texts.mapText = game.add.text(game.world.centerX - 30, 320, "Map1");
+
+        this.texts.carText.fixedToCamera = true;
+        this.texts.mapText.fixedToCamera = true;
     },
     update: function () {
 
@@ -33,6 +38,7 @@ var Menu = {
 
             create: function () {
                 this.button = game.add.button(game.world.centerX - 100, 400, 'playbutton', null, this, 2, 1, 0);
+                this.button.fixedToCamera = true;
                 this.button.onInputOver.add(this.over, this);
                 this.button.onInputOut.add(this.out, this);
                 this.button.onInputDown.add(this.down, this);
@@ -59,6 +65,7 @@ var Menu = {
 
             create: function () {
                 this.button = game.add.button(game.world.centerX + 100, 200, 'arrow.right', null, this, 2, 1, 0);
+                this.button.fixedToCamera = true;
                 this.button.onInputOver.add(this.over, this);
                 this.button.onInputOut.add(this.out, this);
                 this.button.onInputDown.add(this.down, this);
@@ -89,6 +96,7 @@ var Menu = {
 
             create: function () {
                 this.button = game.add.button(game.world.centerX - 160, 200, 'arrow.left', null, this, 2, 1, 0);
+                this.button.fixedToCamera = true;
                 this.button.onInputOver.add(this.over, this);
                 this.button.onInputOut.add(this.out, this);
                 this.button.onInputDown.add(this.down, this);
@@ -119,6 +127,7 @@ var Menu = {
 
             create: function () {
                 this.button = game.add.button(game.world.centerX - 160, 300, 'arrow.left', null, this, 2, 1, 0);
+                this.button.fixedToCamera = true;
                 this.button.onInputOver.add(this.over, this);
                 this.button.onInputOut.add(this.out, this);
                 this.button.onInputDown.add(this.down, this);
@@ -149,6 +158,7 @@ var Menu = {
 
             create: function () {
                 this.button = game.add.button(game.world.centerX + 100, 300, 'arrow.right', null, this, 2, 1, 0);
+                this.button.fixedToCamera = true;
                 this.button.onInputOver.add(this.over, this);
                 this.button.onInputOut.add(this.out, this);
                 this.button.onInputDown.add(this.down, this);
