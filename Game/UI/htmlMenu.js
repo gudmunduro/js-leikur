@@ -6,11 +6,16 @@ class HtmlMenu {
         this._state = 0;
         this._createStateFuncs = {};
         this._currentStateContent = {
-            id: null,
-            container: null,
+            id: undefined,
+            container: undefined,
             elements: []
         };
+        this._mainContainer = document.createElement("div");
+        document.body.appendChild(this._mainContainer);
+
         this.create();
+
+        this.state = this.defaultState();
     }
 
     create()
@@ -18,9 +23,21 @@ class HtmlMenu {
 
     }
 
+    defaultState()
+    {
+        return 0;
+    }
+
+    destroy()
+    {
+        this._removeAll();
+        this._mainContainer = document.createElement("div");
+        this._state = 0;
+    }
+
     addState(id, createFunc)
     {
-        this._createStateFuncs = {id: createFunc};
+        this._createStateFuncs[id] = createFunc;
     }
 
     add(elementTag, options, to = this._currentStateContent.container)
@@ -37,16 +54,18 @@ class HtmlMenu {
 
     get state()
     {
-        return this._state;
+        return parseInt(this._state);
     }
 
     set state(value)
     {
-        this._state = value;
+        if (!Object.keys(this._createStateFuncs).includes(value.toString())) return;
+
+        this._state = value.toString();
         this._removeAll();
         this._createContainer();
-        this._currentStateContent.id = value;
-        this._createStateFuncs[value]();
+        this._currentStateContent.id = value.toString();
+        this._createStateFuncs[value.toString()]();
     }
 
     // Private
@@ -54,11 +73,14 @@ class HtmlMenu {
     _createContainer()
     {
         this._currentStateContent.container = document.createElement("div");
+        this._mainContainer.appendChild(this._currentStateContent.container);
     }
 
     _removeAll()
     {
-        this._currentStateContent.container.parentNode.removeChild(this._currentStateContent.container);
+        if (this._currentStateContent.container == null) return;
+        this._mainContainer.removeChild(this._currentStateContent.container);
+        this._currentStateContent.container = undefined;
         this._currentStateContent.elements = [];
     }
 

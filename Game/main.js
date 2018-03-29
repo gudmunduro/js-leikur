@@ -5,6 +5,7 @@ var main = {
     currentMode: 0,
     currentGame: null,
     debug: false,
+    menu: null,
 
     preload: function () {
         game.load.image('testMap', 'Game/Assets/Img/ground.paint.png');
@@ -29,14 +30,18 @@ var main = {
 
     create: function () {
         switch (main.currentMode) {
-            case 0: Menu.create(); break;
+            case 0: {
+                main.menu = new MainMenu();
+                game.canvas.style.display = "none";
+                break;
+            }
             case 1: GameMain.create(); break;
         }
     },
 
     update: function () {
         switch (main.currentMode) {
-            case 0: Menu.update(); break;
+            case 0: break;
             case 1: GameMain.update(); break;
         }
     },
@@ -47,13 +52,27 @@ var main = {
 
     setMode: function (mode) {
         switch (main.currentMode) {
-            case 0: Menu.destroy(); break;
-            case 1: GameMain.destroy(); break;
+            case 0: {
+                main.menu.destroy();
+                break;
+            }
+            case 1: {
+                GameMain.destroy();
+                break;
+            }
         }
 
         switch (mode) {
-            case 0: Menu.create(); break;
-            case 1: GameMain.create(); break;
+            case 0: {
+                game.canvas.style.display = "none";
+                main.menu = new MainMenu(); 
+                break;
+            }
+            case 1: {
+                game.canvas.style.display = "";
+                GameMain.create();
+                break;
+            }
         }
         main.currentMode = mode;
     },
