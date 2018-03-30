@@ -1,4 +1,3 @@
-// import { config } from "./Config";
 
 var main = {
 
@@ -8,7 +7,10 @@ var main = {
     menu: null,
 
     preload: function () {
-        game.load.image('testMap', 'Game/Assets/Img/ground.paint.png');
+
+        // Maps
+        game.load.image('road.ground', 'Game/Assets/Img/Maps/Road/ground.png');
+        game.load.image('mountain.ground', 'Game/Assets/Img/Maps/Mountain/ground.png');
 
         // Cars
         game.load.image('sprcar.body', 'Game/Assets/Img/Cars/spr_vintage/body.png');
@@ -84,4 +86,5 @@ var main = {
     }
 }
 
-var game = new Phaser.Game(800, 600, Phaser.WEBGL, 'phaser-example', { preload: main.preload, create: main.create, update: main.update, render: main.render });
+
+var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.WEBGL, 'phaser-example', { preload: main.preload, create: main.create, update: main.update, render: main.render });

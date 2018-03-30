@@ -11,6 +11,7 @@ class HtmlMenu {
             elements: []
         };
         this._mainContainer = document.createElement("div");
+        this._mainContainer.className = "mainContainer";
         document.body.appendChild(this._mainContainer);
 
         this.create();
@@ -31,7 +32,7 @@ class HtmlMenu {
     destroy()
     {
         this._removeAll();
-        this._mainContainer = document.createElement("div");
+        document.body.removeChild(this._mainContainer);
         this._state = 0;
     }
 
@@ -48,7 +49,7 @@ class HtmlMenu {
             element[key] = options[key];
         }
         this._currentStateContent.elements.push(element);
-        this._currentStateContent.container.appendChild(element);
+        to.appendChild(element);
         return element;
     }
 
@@ -73,6 +74,7 @@ class HtmlMenu {
     _createContainer()
     {
         this._currentStateContent.container = document.createElement("div");
+        this._currentStateContent.container.className = "stateContainer";
         this._mainContainer.appendChild(this._currentStateContent.container);
     }
 

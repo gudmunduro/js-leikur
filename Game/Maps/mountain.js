@@ -1,9 +1,9 @@
 ﻿
 
-class Map2 extends Map {
+class Mountain extends Map {
 
     sprite() {
-        return 'testMap';
+        return 'mountain.ground';
     }
 
     spawnLocation() {

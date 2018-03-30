@@ -1,6 +1,13 @@
 ﻿
 var GameMain = {
+    created: false,
+
+
     create: function () {
+        if (this.created) {
+            this.reCreate();
+            return;
+        } // Þarf bara af því að Phaser crashar ef maður reynir að starta physics aftur
         game.world.setBounds(-10000, -10000, 20000, 20000);
 
         game.physics.startSystem(Phaser.Physics.BOX2D);
@@ -27,6 +34,23 @@ var GameMain = {
         this.cursors = game.input.keyboard.createCursorKeys();
 
         game.camera.follow(this.car.body);
+
+        this.created = true;
+    },
+    reCreate: function () {
+        this.map = new this.Map();
+
+        this.car = new this.Car(this.map.spawnLocation());
+
+        this.map.createStars(this.car);
+        let inst = this;
+        this.map.collectStar.add(function (car, star) {
+            inst.collectStar(car, star);
+        });
+
+        this._starCount = 0;
+
+        game.camera.follow(this.car.body);
     },
     update: function () {
         if (this.car.body.x > this.map.endLocation().x)
@@ -35,8 +59,8 @@ var GameMain = {
         }
 
         if (this.cursors.down.isDown) { this.car.brake(); } // 
-        else if (this.cursors.left.isDown && !this.cursors.right.isDown) { this.car.driveBackwards(); }
-        else if (this.cursors.right.isDown && !this.cursors.left.isDown) { this.car.driveForward(); }
+        else if (this.cursors.left.isDown && !this.cursors.right.isDown || game.input.pointer1.isDown && game.input.pointer1.x < window.innerWidth / 2) { this.car.driveBackwards(); }
+        else if (this.cursors.right.isDown && !this.cursors.left.isDown || game.input.pointer1.isDown && game.input.pointer1.x > window.innerWidth / 2) { this.car.driveForward(); }
         else { this.car.disableMotor(); } // roll if no keys pressed
     },
 
@@ -63,7 +87,6 @@ var GameMain = {
     },
 
     set stars(value) {
-        console.log(value);
         this._starCount++;
         this.starCountLabel.text = "Stars: " + this._starCount;
     }

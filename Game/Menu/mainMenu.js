@@ -9,8 +9,8 @@ class MainMenu extends HtmlMenu {
         ];
 
         this.maps = [
-            { name: "Map1", class: Map1, image: "Game/Assets/Img/Maps/Road/preview.png" },
-            { name: "Map2", class: Map2, image: "Game/Assets/Img/Maps/Mountain/preview.png" }
+            { name: "Road", class: Road, image: "Game/Assets/Img/Maps/Road/preview.png" },
+            { name: "Map2", class: Mountain, image: "Game/Assets/Img/Maps/Mountain/preview.png" }
         ];
 
         this.currentCar = 0;
@@ -23,15 +23,18 @@ class MainMenu extends HtmlMenu {
 
             self.add("h1", {
                 innerText: "Main Menu",
-                className: "MenuTitle",
+                className: "menuTitle",
+            });
+            let buttonContainer = self.add("div", {
+                className: "buttonContainer"
             });
             self.add("a", {
                 innerText: "Start",
-                className: "MainMenuStartButton",
+                className: "menuButton",
                 onclick: function () {
                     self.state++;
                 }
-            });
+            }, buttonContainer);
         });
 
         // Select map menu
@@ -39,15 +42,15 @@ class MainMenu extends HtmlMenu {
 
             self.add("h1", {
                 innerText: "Select map",
-                className: "MenuTitle"
+                className: "menuTitle"
             });
 
             let selectionDiv = self.add("div", {
-                className: "SelectionDiv"
+                className: "selectionDiv"
             });
             self.add("a", {
-                innerText: "<-",
-                className: "leftArrow",
+                innerHTML: "&#8592;",
+                className: "arrow",
                 onclick: function () {
                     if (self.currentMap <= 0) self.currentMap = self.maps.length - 1;
                     else self.currentMap--;
@@ -55,13 +58,16 @@ class MainMenu extends HtmlMenu {
                     img.src = self.maps[self.currentMap].image;
                 }
             }, selectionDiv);
+            let imgContainer = self.add("div", {
+                className: "imgContainer"
+            }, selectionDiv);
             let img = self.add("img", {
                 src: self.maps[self.currentMap].image,
                 className: "selectionImage"
-            }, selectionDiv);
+            }, imgContainer);
             self.add("a", {
-                innerText: "->",
-                className: "rightArrow",
+                innerHTML: "&#8594;",
+                className: "arrow",
                 onclick: function () {
                     if (self.currentMap >= self.maps.length - 1) self.currentMap = 0;
                     else self.currentMap++;
@@ -72,7 +78,7 @@ class MainMenu extends HtmlMenu {
 
             self.add("a", {
                 innerText: "Next",
-                className: "nextButton",
+                className: "menuButton",
                 onclick: function () {
                     self.state++;
                 }
@@ -84,15 +90,15 @@ class MainMenu extends HtmlMenu {
 
             self.add("h1", {
                 innerText: "Select car",
-                className: "MenuTitle"
+                className: "menuTitle"
             });
 
             let selectionDiv = self.add("div", {
-                className: "SelectionDiv"
+                className: "selectionDiv"
             });
             self.add("a", {
-                innerText: "<-",
-                className: "leftArrow",
+                innerHTML: "&#8592;",
+                className: "arrow",
                 onclick: function () {
                     if (self.currentCar <= 0) self.currentCar = self.cars.length - 1;
                     else self.currentCar--;
@@ -100,13 +106,16 @@ class MainMenu extends HtmlMenu {
                     img.src = self.cars[self.currentCar].image;
                 }
             }, selectionDiv);
+            let imgContainer = self.add("div", {
+                className: "imgContainer"
+            }, selectionDiv);
             let img = self.add("img", {
                 src: self.cars[self.currentCar].image,
                 className: "selectionImage"
-            }, selectionDiv);
+            }, imgContainer);
             self.add("a", {
-                innerText: "->",
-                className: "rightArrow",
+                innerHTML: "&#8594;",
+                className: "arrow",
                 onclick: function () {
                     if (self.currentCar >= self.cars.length - 1) self.currentCar = 0;
                     else self.currentCar++;
@@ -117,7 +126,7 @@ class MainMenu extends HtmlMenu {
 
             self.add("a", {
                 innerText: "Play",
-                className: "nextButton",
+                className: "menuButton",
                 onclick: function () {
                     let car = self.cars[self.currentCar].class;
                     let map = self.maps[self.currentMap].class

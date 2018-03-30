@@ -53,7 +53,6 @@ var Menu = {
             },
 
             down: function () {
-                console.log("button pressed");
                 let car = Menu.methods.getCarClass(Menu.data.cars[Menu.data.selectedCar]);
                 let map = Menu.methods.getMapClass(Menu.data.maps[Menu.data.selectedMap]);
                 main.startGame(car, map);
